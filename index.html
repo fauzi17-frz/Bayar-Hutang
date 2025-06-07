@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Catatan Hutang Neraka - Ingat Bayar Hutangmu!</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&display=swap');
+
+  :root {
+    --color-bg: #ffffff;
+    --color-text-primary: #111827;
+    --color-text-secondary: #6b7280;
+    --color-card-bg: #fff;
+    --color-accent: #b91c1c; /* Merah tajam tapi elegan */
+    --color-accent-hover: #7f1d1d;
+    --color-danger: #b91c1c;
+    --color-button-bg: #000000;
+    --color-button-hover: #222222;
+    --radius: 0.75rem;
+    --spacing-xl: 6rem;
+    --spacing-lg: 4rem;
+    --spacing-md: 2rem;
+    --spacing-sm: 1rem;
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Poppins', sans-serif;
+    --transition-duration: 0.3s;
+    --shadow-light: 0 2px 8px rgb(0 0 0 / 0.06);
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Header */
+  header {
+    position: sticky;
+    top: 0;
+    background: var(--color-bg);
+    box-shadow: 0 2px 8px rgb(185 28 28 / 0.15);
+    z-index: 100;
+    padding: var(--spacing-sm) 0;
+  }
+
+  header .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.6rem;
+    color: var(--color-accent);
+    letter-spacing: 0.04em;
+    user-select: none;
+    cursor: default;
+    text-shadow:
+      0 0 8px var(--color-accent),
+      0 0 15px #7f1d1d;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: var(--spacing-md);
+    margin: 0;
+    padding: 0;
+  }
+
+  nav li {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    user-select: none;
+    cursor: default;
+  }
+
+  /* Main container */
+  main.container {
+    max-width: 1200px;
+    margin: var(--spacing-xl) auto var(--spacing-xl);
+    padding: 0 var(--spacing-md);
+    flex-grow: 1;
+  }
+
+  /* Hero with warm subtle red gradient background */
+  .hero {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius);
+    background: linear-gradient(135deg, #fef2f2 0%, #f8717180 60%, #fef2f2 100%);
+    box-shadow:
+      0 4px 15px rgb(248 113 113 / 0.25);
+  }
+
+  .hero h1 {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: 56px;
+    margin-bottom: 0.5rem;
+    color: var(--color-accent);
+    text-shadow:
+      0 0 10px #b91c1c, 
+      0 0 20px #7f1d1d;
+  }
+
+  .hero p {
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--color-danger);
+    margin-top: 0;
+    font-style: italic;
+    user-select: none;
+    text-shadow:
+      0 0 8px #b91c1c88;
+  }
+
+  /* Forms grid */
+  .forms {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  /* Form styling */
+  form {
+    background: var(--color-card-bg);
+    padding: var(--spacing-md);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-light);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  form h2 {
+    margin: 0 0 var(--spacing-md) 0;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--color-accent);
+    text-shadow: 0 0 5px #b91c1caa;
+  }
+
+  label {
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.25rem;
+  }
+
+  input[type="text"],
+  input[type="number"] {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-family: var(--font-body);
+    transition: border-color var(--transition-duration) ease;
+  }
+
+  input[type="text"]:focus,
+  input[type="number"]:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 5px rgb(185 28 28 / 0.6);
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Buttons */
+  button[type="submit"], button.reset-btn {
+    margin-top: var(--spacing-md);
+    background-color: var(--color-button-bg);
+    color: white;
+    padding: 0.85rem;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.125rem;
+    transition:
+      background-color var(--transition-duration) ease,
+      transform var(--transition-duration) ease,
+      box-shadow var(--transition-duration) ease;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+    user-select: none;
+    filter: drop-shadow(0 0 6px #b91c1cbb);
+  }
+
+  button[type="submit"]:hover,
+  button[type="submit"]:focus {
+    background-color: var(--color-button-hover);
+    transform: scale(1.05);
+    outline: none;
+    box-shadow: 0 0 20px #b91c1ccc, 0 12px 30px #7f1d1dcc;
+  }
+
+  button.reset-btn {
+    background: transparent;
+    color: var(--color-danger);
+    border: 1px solid var(--color-danger);
+    margin-left: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: var(--radius);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  button.reset-btn:hover,
+  button.reset-btn:focus {
+    color: white;
+    background-color: var(--color-danger);
+    outline: none;
+    box-shadow: 0 0 10px var(--color-danger);
+  }
+
+  /* Records grid */
+  section.records {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  /* Card style */
+  .card {
+    background: var(--color-card-bg);
+    padding: var(--spacing-md);
+    border-radius: var(--radius);
+    box-shadow:
+      0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    position: relative;
+  }
+
+  .card p {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: var(--color-text-primary);
+    flex: 1 1 auto;
+    min-width: 130px;
+  }
+
+  .card .amount {
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--color-accent);
+    flex: 0 0 auto;
+    min-width: 130px;
+    text-align: right;
+    text-shadow: 0 0 3px #b91c1c;
+  }
+
+  /* Action buttons inside cards */
+  .card .actions {
+    display: flex;
+    gap: 8px;
+    flex: 0 0 auto;
+    margin-left: 8px;
+  }
+
+  button.action-btn {
+    background: transparent;
+    border: none;
+    color: var(--color-accent);
+    cursor: pointer;
+    font-size: 1.4rem;
+    padding: 4px 10px;
+    border-radius: var(--radius);
+    transition:
+      color var(--transition-duration) ease,
+      background-color var(--transition-duration) ease,
+      transform var(--transition-duration) ease;
+    user-select: none;
+  }
+  button.action-btn:hover,
+  button.action-btn:focus {
+    color: var(--color-accent-hover);
+    background-color: #fddede;
+    transform: scale(1.2);
+    outline: none;
+    box-shadow: 0 0 10px #b91c1c98;
+  }
+
+  /* Footer styling */
+  footer {
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    padding: var(--spacing-md) 0;
+    user-select: none;
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .hero h1 {
+      font-size: 36px;
+      padding: 0 1rem;
+    }
+    .forms, section.records {
+      grid-template-columns: 1fr;
+    }
+    button[type="submit"], button.reset-btn {
+      font-size: 1.25rem;
+      padding: 1rem;
+    }
+    .card p, .card .amount {
+      min-width: auto;
+      flex-basis: 100%;
+      text-align: left;
+      margin-bottom: 0.5rem;
+    }
+    .card .actions {
+      justify-content: flex-end;
+      margin-left: 0;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav aria-label="Navigasi utama">
+      <div class="logo">Catatan Hutang Neraka</div>
+      <ul>
+        <li>📝</li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main class="container" role="main">
+  <section class="hero" aria-label="Motivasi cepat bayar hutang">
+    <h1>Cepat Bayar Hutangmu!</h1>
+    <p>Hutang dibawa mati, jaminannya neraka!</p>
+  </section>
+
+  <section class="forms" aria-label="Form tambah dan edit catatan hutang">
+    <form id="formHutangOrang" aria-label="Form Hutang Orang">
+      <h2>Hutang Orang</h2>
+      <label for="namaHutangOrang">Nama</label>
+      <input type="text" id="namaHutangOrang" name="nama" placeholder="Nama orang" required autocomplete="off" />
+      <label for="jumlahHutangOrang">Jumlah (Rp)</label>
+      <input type="text" inputmode="numeric" pattern="[0-9\s\.,]*" id="jumlahHutangOrang" name="jumlah" placeholder="Jumlah uang" required />
+      <div style="display:flex; align-items:center; margin-top: var(--spacing-sm);">
+        <button type="submit">Catat Hutang</button>
+        <button type="reset" class="reset-btn" id="resetBtnHutangOrang" style="display:none;">Batal</button>
+      </div>
+    </form>
+
+    <form id="formHutangSaya" aria-label="Form Hutang Saya">
+      <h2>Hutang Saya</h2>
+      <label for="namaHutangSaya">Nama</label>
+      <input type="text" id="namaHutangSaya" name="nama" placeholder="Nama orang" required autocomplete="off" />
+      <label for="jumlahHutangSaya">Jumlah (Rp)</label>
+      <input type="text" inputmode="numeric" pattern="[0-9\s\.,]*" id="jumlahHutangSaya" name="jumlah" placeholder="Jumlah uang" required />
+      <div style="display:flex; align-items:center; margin-top: var(--spacing-sm);">
+        <button type="submit">Catat Hutang</button>
+        <button type="reset" class="reset-btn" id="resetBtnHutangSaya" style="display:none;">Batal</button>
+      </div>
+    </form>
+  </section>
+
+  <section aria-label="Daftar hutang" class="records">
+    <div>
+      <h2>Hutang Orang</h2>
+      <div id="listHutangOrang" aria-live="polite" aria-relevant="additions"></div>
+    </div>
+    <div>
+      <h2>Hutang Saya</h2>
+      <div id="listHutangSaya" aria-live="polite" aria-relevant="additions"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  &copy; 2025 Catatan Hutang. Semua hak cipta dilindungi. 
+</footer>
+<footer>
+   By: Ahmad Fauzi Al Farez.
+<footer>
+<footer>
+   Jangan lupa Bayar Hutang nya ya Guys.
+<footer>
+  
+<script>
+  const STORAGE_KEYS = {
+    hutangOrang: 'catatan_hutang_orang_neraka',
+    hutangSaya: 'catatan_hutang_saya_neraka'
+  };
+
+  // Elements
+  const formHutangOrang = document.getElementById('formHutangOrang');
+  const listHutangOrang = document.getElementById('listHutangOrang');
+  const resetBtnHutangOrang = document.getElementById('resetBtnHutangOrang');
+
+  const formHutangSaya = document.getElementById('formHutangSaya');
+  const listHutangSaya = document.getElementById('listHutangSaya');
+  const resetBtnHutangSaya = document.getElementById('resetBtnHutangSaya');
+
+  // Edit mode trackers
+  let editIndexOrang = null;
+  let editIndexSaya = null;
+
+  // Format number with thousand separators (dot)
+  function formatRupiah(angka) {
+    if (!angka) return '';
+    const numStr = angka.toString().replace(/\D/g,'');
+    return numStr.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+
+  // Parse formatted rupiah string back to number
+  function parseRupiah(str) {
+    if(!str) return 0;
+    return Number(str.replace(/\./g, ''));
+  }
+
+  function loadData(key) {
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : [];
+  }
+
+  function saveData(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
+  }
+
+  function renderList(container, data, isOrang = true) {
+    if (data.length === 0) {
+      container.innerHTML = '<p style="color: var(--color-text-secondary); font-style: italic;">Tidak ada catatan</p>';
+      return;
+    }
+    container.innerHTML = '';
+    data.forEach((item, index) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.setAttribute('tabindex', '0');
+      card.innerHTML = `
+        <p>${item.nama}</p>
+        <p class="amount">Rp ${formatRupiah(item.jumlah)}</p>
+        <div class="actions" role="group" aria-label="Aksi untuk catatan">
+          <button class="action-btn" title="Edit" aria-label="Edit catatan ${item.nama}" data-index="${index}" data-type="${isOrang ? 'orang' : 'saya'}">&#9998;</button>
+          <button class="action-btn" title="Hapus" aria-label="Hapus catatan ${item.nama}" data-index="${index}" data-type="${isOrang ? 'orang' : 'saya'}">&times;</button>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  let hutangOrangData = loadData(STORAGE_KEYS.hutangOrang);
+  let hutangSayaData = loadData(STORAGE_KEYS.hutangSaya);
+
+  function renderAll() {
+    renderList(listHutangOrang, hutangOrangData, true);
+    renderList(listHutangSaya, hutangSayaData, false);
+  }
+
+  renderAll();
+
+  function resetForm(form, resetBtn) {
+    form.reset();
+    resetBtn.style.display = 'none';
+    form.querySelector('button[type="submit"]').textContent = 'Catat Hutang';
+  }
+
+  function fillForm(form, data, resetBtn) {
+    form.nama.value = data.nama;
+    form.jumlah.value = formatRupiah(data.jumlah);
+    resetBtn.style.display = 'inline-block';
+    form.querySelector('button[type="submit"]').textContent = 'Update Hutang';
+    form.nama.focus();
+  }
+
+  // Format input while typing for rupiah fields
+  function bindFormatRupiah(input) {
+    input.addEventListener('input', e => {
+      const cursorPos = input.selectionStart;
+      const oldLength = input.value.length;
+
+      input.value = formatRupiah(input.value);
+
+      const newLength = input.value.length;
+      const diff = newLength - oldLength;
+      input.selectionEnd = cursorPos + diff;
+    });
+  }
+
+  // Bind formatting rupiah for both inputs
+  bindFormatRupiah(document.getElementById('jumlahHutangOrang'));
+  bindFormatRupiah(document.getElementById('jumlahHutangSaya'));
+
+  // Form Hutang Orang
+  formHutangOrang.addEventListener('submit', e => {
+    e.preventDefault();
+    const nama = e.target.nama.value.trim();
+    const jumlahStr = e.target.jumlah.value.trim();
+    const jumlah = parseRupiah(jumlahStr);
+    if (!nama || jumlah <= 0) return;
+
+    if (editIndexOrang !== null) {
+      hutangOrangData[editIndexOrang] = { nama, jumlah };
+      editIndexOrang = null;
+    } else {
+      hutangOrangData.push({ nama, jumlah });
+    }
+    saveData(STORAGE_KEYS.hutangOrang, hutangOrangData);
+    renderList(listHutangOrang, hutangOrangData, true);
+    resetForm(formHutangOrang, resetBtnHutangOrang);
+    e.target.reset();
+  });
+
+  resetBtnHutangOrang.addEventListener('click', () => {
+    editIndexOrang = null;
+    resetForm(formHutangOrang, resetBtnHutangOrang);
+    formHutangOrang.reset();
+  });
+
+  // Form Hutang Saya
+  formHutangSaya.addEventListener('submit', e => {
+    e.preventDefault();
+    const nama = e.target.nama.value.trim();
+    const jumlahStr = e.target.jumlah.value.trim();
+    const jumlah = parseRupiah(jumlahStr);
+    if (!nama || jumlah <= 0) return;
+
+    if (editIndexSaya !== null) {
+      hutangSayaData[editIndexSaya] = { nama, jumlah };
+      editIndexSaya = null;
+    } else {
+      hutangSayaData.push({ nama, jumlah });
+    }
+    saveData(STORAGE_KEYS.hutangSaya, hutangSayaData);
+    renderList(listHutangSaya, hutangSayaData, false);
+    resetForm(formHutangSaya, resetBtnHutangSaya);
+    e.target.reset();
+  });
+
+  resetBtnHutangSaya.addEventListener('click', () => {
+    editIndexSaya = null;
+    resetForm(formHutangSaya, resetBtnHutangSaya);
+    formHutangSaya.reset();
+  });
+
+  // Delegated event listeners for edit & delete buttons in the cards
+  document.addEventListener('click', e => {
+    if (e.target.classList.contains('action-btn')) {
+      const idx = parseInt(e.target.dataset.index);
+      const type = e.target.dataset.type;
+      if (isNaN(idx)) return;
+
+      if (e.target.title === 'Edit') {
+        if (type === 'orang') {
+          fillForm(formHutangOrang, hutangOrangData[idx], resetBtnHutangOrang);
+          editIndexOrang = idx;
+        } else {
+          fillForm(formHutangSaya, hutangSayaData[idx], resetBtnHutangSaya);
+          editIndexSaya = idx;
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (e.target.title === 'Hapus') {
+        const nama = (type === 'orang' ? hutangOrangData[idx].nama : hutangSayaData[idx].nama);
+        if (confirm(`Hapus catatan hutang dari "${nama}"?`)) {
+          if (type === 'orang') {
+            hutangOrangData.splice(idx, 1);
+            saveData(STORAGE_KEYS.hutangOrang, hutangOrangData);
+            renderList(listHutangOrang, hutangOrangData, true);
+            if (editIndexOrang === idx) {
+              resetForm(formHutangOrang, resetBtnHutangOrang);
+              editIndexOrang = null;
+              formHutangOrang.reset();
+            }
+          } else {
+            hutangSayaData.splice(idx, 1);
+            saveData(STORAGE_KEYS.hutangSaya, hutangSayaData);
+            renderList(listHutangSaya, hutangSayaData, false);
+            if (editIndexSaya === idx) {
+              resetForm(formHutangSaya, resetBtnHutangSaya);
+              editIndexSaya = null;
+              formHutangSaya.reset();
+            }
+          }
+        }
+      }
+    }
+  });
+
+  // UX for Enter key focusing next input field on Nama -> Jumlah
+  document.getElementById('namaHutangOrang').addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      document.getElementById('jumlahHutangOrang').focus();
+    }
+  });
+  document.getElementById('namaHutangSaya').addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      document.getElementById('jumlahHutangSaya').focus();
+    }
+  });
+</script>
+</body>
+</html>
+
